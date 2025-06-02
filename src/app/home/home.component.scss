@@ -1,0 +1,213 @@
+@use '../../styles.scss' as *;
+
+.hero {
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+
+    @media (max-width: 992px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  .hero-content {
+    flex: 1;
+    animation: fadeInUp 1s ease;
+
+    .hero-title {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: $bijela;
+
+      span {
+        color: $sekundarna-boja;
+        text-shadow: 0 0 15px rgba($sekundarna-boja, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: rgba($bijela, 0.8);
+      max-width: 600px;
+
+      @media (max-width: 992px) {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+
+      @media (max-width: 992px) {
+        justify-content: center;
+      }
+
+      @media (max-width: 576px) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .hero-image {
+    flex: 1;
+    position: relative;
+    animation: fadeIn 1.5s ease;
+
+    .glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba($sekundarna-boja, 0.4) 0%, transparent 50%);
+      border-radius: 10px;
+      filter: blur(20px);
+      z-index: -1;
+      animation: pulse 4s infinite alternate;
+    }
+
+    .featured-image {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      border: 2px solid rgba($sekundarna-boja, 0.3);
+
+      &:hover {
+        transform: translateY(-5px) scale(1.02);
+      }
+    }
+  }
+}
+
+.features {
+  padding: 4rem 0;
+  background-color: rgba($primarna-boja, 0.5);
+  border-top: 1px solid rgba($sekundarna-boja, 0.2);
+  border-bottom: 1px solid rgba($sekundarna-boja, 0.2);
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .feature-card {
+    background: rgba($bijela, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba($sekundarna-boja, 0.1);
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      border-color: rgba($sekundarna-boja, 0.3);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: $sekundarna-boja;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: $bijela;
+    }
+
+    p {
+      color: rgba($bijela, 0.7);
+      margin-bottom: 0;
+    }
+  }
+}
+
+.btn-primary, .btn-secondary {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: $sekundarna-boja;
+  color: $crna;
+  box-shadow: 0 4px 15px rgba($sekundarna-boja, 0.3);
+
+  &:hover {
+    background-color: lighten($sekundarna-boja, 10%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba($sekundarna-boja, 0.4);
+  }
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: $bijela;
+  border: 2px solid $sekundarna-boja;
+
+  &:hover {
+    background-color: rgba($sekundarna-boja, 0.1);
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}

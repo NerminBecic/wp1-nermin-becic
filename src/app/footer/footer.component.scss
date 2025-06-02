@@ -1,0 +1,26 @@
+@import '../../styles.scss';
+
+footer {
+  background-color: $primarna-boja;
+  color: $bijela;
+  padding: 1rem 0;
+  text-align: center;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .drustvene-mreze {
+    a {
+      color: $bijela;
+      margin-left: 1rem;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

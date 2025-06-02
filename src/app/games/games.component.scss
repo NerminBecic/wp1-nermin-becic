@@ -1,0 +1,451 @@
+@use '../../styles.scss' as *;
+
+.games-section {
+  padding: 4rem 0;
+  background-color: rgba($primarna-boja, 0.1);
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba($sekundarna-boja, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba($akcent, 0.1) 0%, transparent 25%);
+
+  .container {
+    position: relative;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: $bijela;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+
+    span {
+      color: $sekundarna-boja;
+      text-shadow: 0 0 10px rgba($sekundarna-boja, 0.5);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, $sekundarna-boja, transparent);
+    }
+  }
+
+  .games-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .filter-control, .sort-control {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      label {
+        color: $bijela;
+        font-weight: 500;
+      }
+
+      select {
+        background-color: rgba($bijela, 0.1);
+        border: 1px solid rgba($sekundarna-boja, 0.3);
+        color: $bijela;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: rgba($bijela, 0.2);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $sekundarna-boja;
+          box-shadow: 0 0 0 2px rgba($sekundarna-boja, 0.3);
+        }
+      }
+    }
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .game-card {
+    background: rgba($bijela, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    border: 1px solid rgba($sekundarna-boja, 0.1);
+    position: relative;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba($sekundarna-boja, 0.3);
+
+      .game-image img {
+        transform: scale(1.05);
+      }
+    }
+
+    &.discounted::before {
+      content: 'Sniženo';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: $akcent;
+      color: $bijela;
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      z-index: 2;
+    }
+
+    .game-image {
+      position: relative;
+      overflow: hidden;
+      height: 350px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .game-rating {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: rgba($crna, 0.7);
+        color: $sekundarna-boja;
+        padding: 0.3rem 0.6rem;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-weight: bold;
+
+        .star {
+          color: gold;
+        }
+      }
+
+      .game-platforms {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        span {
+          background-color: rgba($primarna-boja, 0.8);
+          color: $bijela;
+          padding: 0.2rem 0.5rem;
+          border-radius: 3px;
+          font-size: 0.7rem;
+        }
+      }
+
+      .game-genre {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba($sekundarna-boja, 0.8);
+        color: $crna;
+        padding: 0.3rem 0.6rem;
+        border-radius: 3px;
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+    }
+
+    .game-info {
+      padding: 1.2rem;
+
+      h3 {
+        margin: 0 0 0.5rem 0;
+        color: $bijela;
+        font-size: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .price-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .price {
+          margin: 0;
+          font-weight: bold;
+          color: $sekundarna-boja;
+          font-size: 1.1rem;
+
+          &.discount {
+            color: $akcent;
+          }
+        }
+
+        .original-price {
+          margin: 0;
+          text-decoration: line-through;
+          color: rgba($bijela, 0.5);
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  .game-details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+
+    .details-content {
+      background: $primarna-boja;
+      border-radius: 15px;
+      max-width: 900px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba($sekundarna-boja, 0.3);
+      position: relative;
+      animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba($bijela, 0.1);
+        border: none;
+        color: $bijela;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 2;
+
+        &:hover {
+          background: $akcent;
+          transform: rotate(90deg);
+        }
+      }
+
+      .detail-header {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        @media (min-width: 768px) {
+          flex-direction: row;
+        }
+
+        img {
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+
+          @media (min-width: 768px) {
+            width: 40%;
+            height: auto;
+            border-radius: 15px 0 0 0;
+          }
+        }
+
+        .detail-title {
+          padding: 2rem;
+          flex: 1;
+
+          h3 {
+            margin: 0 0 1rem 0;
+            color: $bijela;
+            font-size: 2rem;
+          }
+
+          .detail-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+
+            span {
+              padding: 0.3rem 0.8rem;
+              border-radius: 20px;
+              font-size: 0.9rem;
+              font-weight: 500;
+
+              &.genre {
+                background-color: rgba($sekundarna-boja, 0.2);
+                color: $sekundarna-boja;
+              }
+
+              &.rating {
+                background-color: rgba(gold, 0.2);
+                color: gold;
+              }
+
+              &.date {
+                background-color: rgba($bijela, 0.2);
+                color: $bijela;
+              }
+            }
+          }
+
+          .platforms {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+
+            span {
+              background-color: rgba($bijela, 0.1);
+              color: $bijela;
+              padding: 0.3rem 0.8rem;
+              border-radius: 3px;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+
+      .detail-body {
+        padding: 0 2rem 2rem 2rem;
+
+        p {
+          color: rgba($bijela, 0.8);
+          line-height: 1.6;
+          margin-bottom: 2rem;
+        }
+
+        .price-container {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-top: 2rem;
+
+          .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: $sekundarna-boja;
+            margin: 0;
+
+            &.discount {
+              color: $akcent;
+            }
+          }
+
+          .original-price {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            color: rgba($bijela, 0.5);
+            margin: 0;
+          }
+
+          .buy-btn {
+            margin-left: auto;
+            background-color: $sekundarna-boja;
+            color: $crna;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            &:hover {
+              background-color: lighten($sekundarna-boja, 10%);
+              transform: translateY(-3px);
+              box-shadow: 0 5px 15px rgba($sekundarna-boja, 0.3);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .games-section {
+    .section-title {
+      font-size: 2.2rem;
+    }
+
+    .game-card {
+      .game-image {
+        height: 250px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .games-section {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+
+    .games-controls {
+      flex-direction: column;
+      
+      .filter-control, .sort-control {
+        width: 100%;
+        
+        select {
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+}

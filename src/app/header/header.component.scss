@@ -1,0 +1,159 @@
+@use '../../styles.scss' as *;
+
+header {
+  background-color: rgba($primarna-boja, 0.9);
+  backdrop-filter: blur(10px);
+  color: $bijela;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba($sekundarna-boja, 0.2);
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      
+      .logo {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 700;
+        color: $sekundarna-boja;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba($sekundarna-boja, 0.5);
+        transition: all 0.3s ease;
+        
+        span {
+          color: $bijela;
+          font-weight: 400;
+        }
+        
+        &:hover {
+          transform: scale(1.05);
+          text-shadow: 0 0 15px rgba($sekundarna-boja, 0.8);
+        }
+      }
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+      
+      @media (max-width: 768px) {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: rgba($primarna-boja, 0.95);
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+        border-bottom: 1px solid rgba($sekundarna-boja, 0.2);
+        
+        &.open {
+          max-height: 500px;
+        }
+      }
+
+      li {
+        position: relative;
+        
+        a {
+          color: $bijela;
+          text-decoration: none;
+          padding: 0.5rem 1rem;
+          font-weight: 500;
+          position: relative;
+          transition: all 0.3s ease;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          font-size: 0.9rem;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: $sekundarna-boja;
+            transition: width 0.3s ease;
+          }
+          
+          &:hover {
+            color: $sekundarna-boja;
+            
+            &::before {
+              width: 80%;
+            }
+          }
+          
+          &.active {
+            color: $sekundarna-boja;
+            font-weight: 600;
+            
+            &::before {
+              width: 80%;
+              background-color: $sekundarna-boja;
+            }
+          }
+        }
+      }
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1001;
+      
+      span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background-color: $bijela;
+        border-radius: 3px;
+        transition: all 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+        transform-origin: center;
+      }
+      
+      @media (max-width: 768px) {
+        display: flex;
+      }
+      
+      &.open {
+        span:nth-child(1) {
+          transform: translateY(9px) rotate(45deg);
+          background-color: $sekundarna-boja;
+        }
+        span:nth-child(2) {
+          opacity: 0;
+        }
+        span:nth-child(3) {
+          transform: translateY(-9px) rotate(-45deg);
+          background-color: $sekundarna-boja;
+        }
+      }
+    }
+  }
+}
